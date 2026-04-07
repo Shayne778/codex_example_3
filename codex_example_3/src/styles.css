@@ -1,0 +1,751 @@
+:root {
+  --bg: #08111f;
+  --bg-soft: #0f1d34;
+  --panel: rgba(12, 24, 44, 0.78);
+  --panel-strong: rgba(16, 31, 56, 0.92);
+  --border: rgba(171, 197, 255, 0.18);
+  --text: #edf4ff;
+  --muted: #aebed9;
+  --accent: #74d1c7;
+  --accent-strong: #f0b764;
+  --rose: #ff8d8d;
+  --lime: #badf8b;
+  --shadow: 0 26px 80px rgba(4, 9, 19, 0.38);
+  --radius-xl: 30px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 999px;
+  --font-body: "Instrument Sans", sans-serif;
+  --font-display: "Sora", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(116, 209, 199, 0.22), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(240, 183, 100, 0.16), transparent 25%),
+    linear-gradient(145deg, #06101d 0%, #0a1730 42%, #050b15 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent 92%);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.page-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.ambient {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(36px);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.ambient-one {
+  top: -8rem;
+  left: -3rem;
+  width: 22rem;
+  height: 22rem;
+  background: rgba(116, 209, 199, 0.28);
+}
+
+.ambient-two {
+  top: 20%;
+  right: -5rem;
+  width: 26rem;
+  height: 26rem;
+  background: rgba(240, 183, 100, 0.18);
+}
+
+.ambient-three {
+  bottom: -8rem;
+  left: 28%;
+  width: 20rem;
+  height: 20rem;
+  background: rgba(173, 129, 255, 0.16);
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1400px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.2rem 0 2.8rem;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(19, 34, 61, 0.88), rgba(10, 20, 37, 0.85));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 1.5rem;
+  padding: 1.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.eyebrow,
+.mini-label,
+.status-label {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: rgba(199, 214, 246, 0.7);
+}
+
+.hero h1,
+.panel h2,
+.current-card h3,
+.country-banner h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 7vw, 4.6rem);
+  line-height: 0.95;
+}
+
+.lede {
+  max-width: 56ch;
+  margin: 1rem 0 0;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+}
+
+.hero-tags span,
+.country-links span,
+.country-links a {
+  border-radius: var(--radius-sm);
+  padding: 0.68rem 0.95rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.hero-status {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.status-panel,
+.status-cell,
+.loading-card,
+.error-card,
+.empty-state,
+.brief-card,
+.chart-card,
+.plot-card,
+.quake-list-card {
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.status-panel {
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.status-panel strong,
+.status-cell strong {
+  font-family: var(--font-display);
+}
+
+.status-panel strong {
+  font-size: 1.5rem;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.status-cell {
+  padding: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.status-cell strong {
+  font-size: 1.2rem;
+}
+
+.panel {
+  padding: 1.4rem;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.panel h2 {
+  font-size: 1.55rem;
+  margin-top: 0.3rem;
+}
+
+.top-grid,
+.middle-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.top-grid {
+  grid-template-columns: 1.2fr 0.8fr;
+}
+
+.middle-grid {
+  grid-template-columns: 0.78fr 1.22fr;
+}
+
+.panel-large {
+  min-height: 720px;
+}
+
+.search-form,
+.converter-form,
+.quake-controls {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.search-form {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.converter-form {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.converter-form label,
+.quake-controls label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--muted);
+}
+
+.converter-form label span,
+.quake-controls label span {
+  font-size: 0.84rem;
+}
+
+.search-form input,
+.converter-form input,
+.converter-form select,
+.quake-controls select,
+.search-form button,
+.converter-form button,
+.ghost-button {
+  min-height: 3rem;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.search-form input,
+.converter-form input,
+.converter-form select,
+.quake-controls select {
+  width: 100%;
+  padding: 0.85rem 0.95rem;
+  background: rgba(4, 10, 20, 0.36);
+  color: var(--text);
+}
+
+.search-form button,
+.converter-form button,
+.ghost-button {
+  padding: 0.85rem 1rem;
+  background: linear-gradient(135deg, rgba(116, 209, 199, 0.92), rgba(240, 183, 100, 0.92));
+  color: #031018;
+  font-weight: 700;
+}
+
+.ghost-button {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text);
+}
+
+.swap-button {
+  min-width: 5.2rem;
+}
+
+.shortcut-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0 1.2rem;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.chip {
+  padding: 0.62rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.chip-active {
+  background: rgba(116, 209, 199, 0.17);
+  border-color: rgba(116, 209, 199, 0.4);
+}
+
+.hint-text,
+.meta-copy {
+  color: var(--muted);
+}
+
+.stack-block {
+  display: grid;
+  gap: 1rem;
+}
+
+.loading-card,
+.error-card,
+.empty-state {
+  padding: 1rem 1.1rem;
+}
+
+.error-card {
+  border-color: rgba(255, 141, 141, 0.3);
+  color: #ffd0d0;
+}
+
+.overview-grid,
+.detail-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.overview-grid {
+  grid-template-columns: 0.9fr 1.1fr;
+}
+
+.detail-grid {
+  grid-template-columns: 1.05fr 0.95fr;
+}
+
+.detail-grid-earthquake {
+  grid-template-columns: 1.08fr 0.92fr;
+}
+
+.current-card,
+.country-banner,
+.currency-highlight {
+  padding: 1.1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.current-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: linear-gradient(140deg, rgba(13, 30, 59, 0.95), rgba(12, 23, 39, 0.78));
+}
+
+.current-clear {
+  background: linear-gradient(140deg, rgba(18, 64, 105, 0.96), rgba(8, 24, 46, 0.85));
+}
+
+.current-cloud {
+  background: linear-gradient(140deg, rgba(44, 59, 83, 0.96), rgba(12, 23, 39, 0.85));
+}
+
+.current-rain,
+.current-storm {
+  background: linear-gradient(140deg, rgba(16, 49, 84, 0.96), rgba(10, 21, 42, 0.85));
+}
+
+.current-snow,
+.current-fog {
+  background: linear-gradient(140deg, rgba(53, 71, 105, 0.96), rgba(10, 21, 42, 0.85));
+}
+
+.current-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.temperature-line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.temperature-line strong,
+.currency-result strong {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4vw, 3.35rem);
+  line-height: 1;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.metric-grid-tight {
+  margin-top: 0.2rem;
+}
+
+.metric-card {
+  padding: 0.9rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.metric-card span {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--muted);
+  font-size: 0.83rem;
+}
+
+.metric-card strong {
+  display: block;
+  line-height: 1.35;
+}
+
+.chart-card,
+.plot-card,
+.brief-card,
+.quake-list-card {
+  padding: 1rem;
+}
+
+.section-inline-head,
+.plot-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.section-inline-head span,
+.plot-head span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.chart-shell {
+  position: relative;
+}
+
+.chart-shell svg,
+.quake-plot {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chart-line {
+  fill: none;
+  stroke: #74d1c7;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart-point {
+  fill: #f0b764;
+  stroke: rgba(7, 14, 27, 0.85);
+  stroke-width: 2;
+}
+
+.chart-ticks {
+  position: relative;
+  height: 1.4rem;
+  margin-top: 0.2rem;
+}
+
+.chart-ticks span {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 0.74rem;
+  color: rgba(222, 232, 251, 0.78);
+}
+
+.forecast-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.forecast-card {
+  padding: 0.95rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.forecast-card span,
+.forecast-card p {
+  color: var(--muted);
+}
+
+.forecast-card strong {
+  display: block;
+  margin: 0.4rem 0 0.55rem;
+}
+
+.brief-card p {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.brief-card strong {
+  color: var(--text);
+}
+
+.currency-highlight,
+.country-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: linear-gradient(140deg, rgba(20, 34, 64, 0.95), rgba(11, 21, 39, 0.82));
+}
+
+.currency-result {
+  text-align: right;
+}
+
+.currency-result span {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--muted);
+}
+
+.flag-image {
+  width: min(34%, 180px);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  object-fit: cover;
+}
+
+.country-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.quake-controls {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 1rem;
+}
+
+.plot-grid {
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 1;
+}
+
+.plot-grid.faint {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.quake-dot {
+  fill: rgba(240, 183, 100, 0.8);
+  stroke: rgba(255, 235, 198, 0.85);
+  stroke-width: 1.2;
+}
+
+.plot-axis {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-top: 0.55rem;
+}
+
+.quake-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.quake-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem;
+  border-radius: 18px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.quake-row strong {
+  display: block;
+  margin-bottom: 0.18rem;
+}
+
+.quake-row p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.quake-row-meta {
+  display: grid;
+  justify-items: end;
+  gap: 0.2rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 1180px) {
+  .hero,
+  .top-grid,
+  .middle-grid,
+  .overview-grid,
+  .detail-grid,
+  .detail-grid-earthquake {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-large {
+    min-height: unset;
+  }
+}
+
+@media (max-width: 860px) {
+  .app-shell {
+    width: min(100% - 1rem, 1400px);
+    padding-top: 0.55rem;
+  }
+
+  .hero,
+  .panel {
+    padding: 1rem;
+    border-radius: 24px;
+  }
+
+  .search-form,
+  .converter-form,
+  .shortcut-row,
+  .quake-controls,
+  .metric-grid,
+  .forecast-row {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-head,
+  .current-top,
+  .country-banner,
+  .currency-highlight,
+  .section-inline-head,
+  .plot-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .status-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .currency-result {
+    text-align: left;
+  }
+
+  .flag-image {
+    width: 100%;
+    max-width: 180px;
+  }
+
+  .quake-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .quake-row-meta {
+    justify-items: start;
+  }
+}

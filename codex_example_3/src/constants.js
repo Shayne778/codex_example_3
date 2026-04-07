@@ -1,0 +1,71 @@
+export const STORAGE_KEY = "northstar-atlas.saved-cities";
+
+export const DEFAULTS = {
+  city: "Tokyo",
+  country: "Japan",
+  amount: 100,
+  baseCurrency: "USD",
+  quoteCurrency: "EUR",
+  quakeMinimumMagnitude: 2.5,
+  quakeSort: "time",
+};
+
+export const WEATHER_CODES = {
+  0: { label: "Clear sky", tone: "clear" },
+  1: { label: "Mainly clear", tone: "clear" },
+  2: { label: "Partly cloudy", tone: "cloud" },
+  3: { label: "Overcast", tone: "cloud" },
+  45: { label: "Fog", tone: "fog" },
+  48: { label: "Depositing rime fog", tone: "fog" },
+  51: { label: "Light drizzle", tone: "rain" },
+  53: { label: "Moderate drizzle", tone: "rain" },
+  55: { label: "Dense drizzle", tone: "rain" },
+  56: { label: "Light freezing drizzle", tone: "rain" },
+  57: { label: "Dense freezing drizzle", tone: "rain" },
+  61: { label: "Slight rain", tone: "rain" },
+  63: { label: "Moderate rain", tone: "rain" },
+  65: { label: "Heavy rain", tone: "rain" },
+  66: { label: "Light freezing rain", tone: "rain" },
+  67: { label: "Heavy freezing rain", tone: "rain" },
+  71: { label: "Slight snow fall", tone: "snow" },
+  73: { label: "Moderate snow fall", tone: "snow" },
+  75: { label: "Heavy snow fall", tone: "snow" },
+  77: { label: "Snow grains", tone: "snow" },
+  80: { label: "Slight rain showers", tone: "rain" },
+  81: { label: "Moderate rain showers", tone: "rain" },
+  82: { label: "Violent rain showers", tone: "rain" },
+  85: { label: "Slight snow showers", tone: "snow" },
+  86: { label: "Heavy snow showers", tone: "snow" },
+  95: { label: "Thunderstorm", tone: "storm" },
+  96: { label: "Thunderstorm with slight hail", tone: "storm" },
+  99: { label: "Thunderstorm with heavy hail", tone: "storm" },
+};
+
+export const AQI_LEVELS = [
+  { max: 50, label: "Good", tone: "good" },
+  { max: 100, label: "Moderate", tone: "moderate" },
+  { max: 150, label: "Unhealthy for sensitive groups", tone: "elevated" },
+  { max: 200, label: "Unhealthy", tone: "poor" },
+  { max: 300, label: "Very unhealthy", tone: "poor" },
+  { max: Number.POSITIVE_INFINITY, label: "Hazardous", tone: "hazard" },
+];
+
+export const CURRENCY_PREFERRED_ORDER = [
+  "USD",
+  "EUR",
+  "GBP",
+  "JPY",
+  "CAD",
+  "AUD",
+  "CHF",
+  "CNY",
+  "INR",
+  "BRL",
+  "MXN",
+  "KRW",
+  "SGD",
+  "SEK",
+  "NOK",
+  "NZD",
+  "ZAR",
+];

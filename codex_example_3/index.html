@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Northstar Atlas is a static world dashboard with live weather, air quality, currency conversion, country lookup, and earthquake monitoring."
+    />
+    <title>Northstar Atlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+      <div class="ambient ambient-three"></div>
+
+      <main class="app-shell">
+        <header class="hero card">
+          <div class="hero-copy">
+            <p class="eyebrow">codex_example_3</p>
+            <h1>Northstar Atlas</h1>
+            <p class="lede">
+              A modern world dashboard that blends trusted live data into one
+              usable place: weather, air quality, currency movement, country
+              context, and earthquake activity.
+            </p>
+            <div class="hero-tags">
+              <span>Static hosting friendly</span>
+              <span>Live public APIs</span>
+              <span>Saved city shortcuts</span>
+            </div>
+          </div>
+
+          <div class="hero-status">
+            <div class="status-panel">
+              <span class="status-label">Selected place</span>
+              <strong id="hero-location">Loading...</strong>
+              <span id="hero-timezone" class="status-copy">Waiting for data</span>
+            </div>
+            <div class="status-grid">
+              <div class="status-cell">
+                <span class="status-label">Weather</span>
+                <strong id="hero-weather">--</strong>
+              </div>
+              <div class="status-cell">
+                <span class="status-label">FX pair</span>
+                <strong id="hero-fx">--</strong>
+              </div>
+              <div class="status-cell">
+                <span class="status-label">Quakes today</span>
+                <strong id="hero-quakes">--</strong>
+              </div>
+              <div class="status-cell">
+                <span class="status-label">Local time</span>
+                <strong id="hero-clock">--</strong>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="top-grid">
+          <article class="card panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Atmosphere</p>
+                <h2>City weather and air quality</h2>
+              </div>
+              <button id="use-location" class="ghost-button" type="button">
+                Use my location
+              </button>
+            </div>
+
+            <form id="city-form" class="search-form">
+              <label class="sr-only" for="city-query">Search city</label>
+              <input
+                id="city-query"
+                name="city"
+                type="search"
+                placeholder="Search a city like Tokyo, Nairobi, or Sao Paulo"
+                autocomplete="off"
+              />
+              <button type="submit">Load city</button>
+            </form>
+
+            <div class="shortcut-row">
+              <div>
+                <span class="mini-label">Matches</span>
+                <div id="city-matches" class="chip-row"></div>
+              </div>
+              <div>
+                <span class="mini-label">Saved places</span>
+                <div id="saved-cities" class="chip-row"></div>
+              </div>
+            </div>
+
+            <div id="weather-content" class="stack-block"></div>
+          </article>
+
+          <article class="card panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Markets</p>
+                <h2>Currency converter</h2>
+              </div>
+              <span id="currency-meta" class="meta-copy">Loading rates</span>
+            </div>
+
+            <form id="currency-form" class="converter-form">
+              <label>
+                <span>Amount</span>
+                <input
+                  id="amount-input"
+                  name="amount"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="100"
+                />
+              </label>
+              <label>
+                <span>From</span>
+                <select id="base-currency" name="base"></select>
+              </label>
+              <button id="swap-currencies" class="swap-button" type="button">
+                Swap
+              </button>
+              <label>
+                <span>To</span>
+                <select id="quote-currency" name="quote"></select>
+              </label>
+              <button type="submit">Convert</button>
+            </form>
+
+            <div id="currency-content" class="stack-block"></div>
+          </article>
+        </section>
+
+        <section class="middle-grid">
+          <article class="card panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Country lens</p>
+                <h2>Country snapshot</h2>
+              </div>
+            </div>
+
+            <form id="country-form" class="search-form">
+              <label class="sr-only" for="country-query">Search country</label>
+              <input
+                id="country-query"
+                name="country"
+                type="search"
+                placeholder="Search a country like Japan or Brazil"
+                autocomplete="off"
+              />
+              <button type="submit">Load country</button>
+            </form>
+
+            <div id="country-content" class="stack-block"></div>
+          </article>
+
+          <article class="card panel panel-large">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Seismic radar</p>
+                <h2>Recent earthquakes</h2>
+              </div>
+              <button id="refresh-quakes" class="ghost-button" type="button">
+                Refresh feed
+              </button>
+            </div>
+
+            <div class="quake-controls">
+              <label>
+                <span>Minimum magnitude</span>
+                <select id="quake-min-mag" name="minimumMagnitude">
+                  <option value="0">0.0+</option>
+                  <option value="1">1.0+</option>
+                  <option value="2.5" selected>2.5+</option>
+                  <option value="4.5">4.5+</option>
+                </select>
+              </label>
+              <label>
+                <span>Sort by</span>
+                <select id="quake-sort" name="sort">
+                  <option value="time">Newest first</option>
+                  <option value="magnitude">Largest magnitude</option>
+                  <option value="depth">Deepest first</option>
+                </select>
+              </label>
+            </div>
+
+            <div id="quake-content" class="stack-block"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
